@@ -2858,13 +2858,18 @@ function postCard(p, surface = "main") {
     : p.cloud
     ? `<button class="act ${liked ? "on" : ""}" data-like="${p.id}" aria-label="${liked ? "Unlike post" : "Like post"}" aria-pressed="${liked}">${liked ? ic.mediaHeartOn : ic.mediaHeart}<span class="act-count">${fmt(likeCount)}</span></button>
        <button class="act" data-comment="${p.id}" aria-label="Comments">${ic.mediaComment}<span class="act-count">${fmt(p.commentCount || 0)}</span></button>
-       <button class="act ${saved ? "on" : ""}" data-save="${p.id}" aria-label="${saved ? "Remove saved post" : "Save post"}" aria-pressed="${saved}">${saved ? ic.mediaBookmarkOn : ic.mediaBookmark}<span class="act-count">${fmt(saveCount)}</span></button>
+       ${viewsMetric}
+       <button class="act ${saved ? "on" : ""} data-save="${p.id}" aria-label="${saved ? "Remove saved post" : "Save post"}" aria-pressed="${saved}">${saved ? ic.mediaBookmarkOn : ic.mediaBookmark}<span class="act-count">${fmt(saveCount)}</span></button>
        <button class="act" data-share="${p.id}" aria-label="Share post">${ic.share}<span class="act-label">Share</span></button>`
     : `<button class="act ${liked ? "on" : ""}" data-like="${p.id}" aria-label="${liked ? "Unlike post" : "Like post"}" aria-pressed="${liked}">${liked ? ic.mediaHeartOn : ic.mediaHeart}<span class="act-count">${fmt(likeCount)}</span></button>
        <button class="act" data-comment="${p.id}" aria-label="Comments">${ic.mediaComment}<span class="act-count">${fmt(p.comments.length)}</span></button>
-       <button class="act ${saved ? "on" : ""}" data-save="${p.id}" aria-label="${saved ? "Remove saved post" : "Save post"}" aria-pressed="${saved}">${saved ? ic.mediaBookmarkOn : ic.mediaBookmark}<span class="act-count">${fmt(saveCount)}</span></button>
+       ${viewsMetric}
+       <button class="act ${saved ? "on" : ""} data-save="${p.id}" aria-label="${saved ? "Remove saved post" : "Save post"}" aria-pressed="${saved}">${saved ? ic.mediaBookmarkOn : ic.mediaBookmark}<span class="act-count">${fmt(saveCount)}</span></button>
        <button class="act" data-share="${p.id}" aria-label="Share post">${ic.share}<span class="act-label">Share</span></button>`;
-    const soundTitle = audioTitle(p);
+    const viewsMetric = p.cloud && Number.isSafeInteger(p.measuredViews) && p.measuredViews >= 0
+    ? `<span class="ot-view-metric" aria-label="${fmt(p.measuredViews)} views" title="${fmt(p.measuredViews)} views">${ic.viewBars}<span>${fmt(p.measuredViews)}</span></span>`
+    : "";
+  const soundTitle = audioTitle(p);
     const soundLine = /^original audio(?:\s*[·-]\s*)?@?/i.test(soundTitle)
       ? soundTitle.replace(/^original audio(?:\s*[·-]\s*)?@?/i, "original sound - ")
       : soundTitle;
@@ -7294,6 +7299,9 @@ function communityPostCard(post) {
   const commentButton = `<button type="button" data-comment="${esc(post.id)}" aria-label="Comment on post">${ic.comment}<span>${fmt(commentCount)}</span></button>`;
   const saveButton = `<button type="button" class="${saved ? "is-active" : ""}" data-save="${esc(post.id)}" aria-label="${saved ? "Remove saved post" : "Save post"}" aria-pressed="${saved}">${saved ? ic.bookmarkOn : ic.bookmark}</button>`;
   const shareButton = `<button type="button" data-share="${esc(post.id)}" aria-label="Share post">${ic.share}</button>`;
+  const viewsMetric = Number.isSafeInteger(post.measuredViews) && post.measuredViews >= 0
+    ? `<span class="ot-view-metric" aria-label="${fmt(post.measuredViews)} views" title="${fmt(post.measuredViews)} views">${ic.viewBars}<span>${fmt(post.measuredViews)}</span></span>`
+    : "";
   if (layout === "video-card") {
     const item = items[0];
     return `<article class="community-post-card community-video-card" data-testid="card-community-post-${esc(post.id)}">
@@ -7313,7 +7321,7 @@ function communityPostCard(post) {
           ${text ? `<button type="button" class="cvc-caption" data-stories-post="${esc(post.id)}" data-media-index="0">${renderMentionText(text, { tag: "span" })}</button>` : ""}
           ${postPlaceCard(post) ? `<div class="cvc-place">${postPlaceCard(post)}</div>` : ""}
           ${post.threadId ? `<button type="button" class="community-thread-affordance" data-thread-open="${esc(post.id)}">${ic.messageCircle || ic.comment}<span>View thread · Part ${Number(post.threadPosition)+1}</span></button>` : ""}
-          <div class="cvc-actions" aria-label="Post actions">${likeButton}${commentButton}${repostButton}<span class="cvc-spacer"></span>${saveButton}${shareButton}</div>
+          <div class="cvc-actions" aria-label="Post actions">${likeButton}${commentButton}${repostButton}${viewsMetric}<span class="cvc-spacer"></span>${saveButton}${shareButton}</div>
           <button type="button" class="cvc-comment-prompt" data-comment="${esc(post.id)}">${commentPromptLabel(commentCount)}</button>
         </div>
       </div>
@@ -7335,7 +7343,7 @@ function communityPostCard(post) {
     ${text ? `<button type="button" class="community-post-copy" data-stories-post="${esc(post.id)}">${renderMentionText(text, { tag: "span" })}</button>` : ""}
     ${grid}
     ${postPlaceCard(post) ? `<div class="community-post-place">${postPlaceCard(post)}</div>` : ""}
-    <div class="community-post-actions" aria-label="Post actions">${likeButton}${repostButton}${commentButton}${saveButton}${shareButton}</div>
+    <div class="community-post-actions" aria-label="Post actions">${likeButton}${repostButton}${commentButton}${viewsMetric}${saveButton}${shareButton}</div>
   </article>`;
 }
 
