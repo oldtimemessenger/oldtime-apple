@@ -189,7 +189,7 @@ export function mountStoryInteractions({ view, story, api, toast = () => {}, pau
     </form>
     <div class="story-owner-controls">
       <div class="story-more-wrap">
-        <button type="button" class="story-more-open" aria-label="Story activity and options" aria-haspopup="dialog" aria-expanded="false">${icon("tune")}</button>
+        <button type="button" class="story-more-open" aria-label="Story activity and options" aria-haspopup="dialog" aria-expanded="false">${icon("menu")}</button>
         <div class="story-more-menu story-sheet" role="dialog" aria-label="Story activity and options" hidden>
           <div class="story-panel-handle" aria-hidden="true"></div>
           <header class="story-panel-head">
