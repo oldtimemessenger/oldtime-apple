@@ -74,7 +74,7 @@ export function renderCreativeEditor({ destination = "post", hasSource = false, 
         <label class="ce-field ce-inline" for="ce-camera-timer"><span>${I.timer}Timer</span><select id="ce-camera-timer"><option value="0">Off</option><option value="3">3s</option><option value="10">10s</option></select></label>
       </div>
       </details>
-      <details class="ce-menu ce-header-menu" name="ce-menu"><summary aria-label="Editing actions">${I.more}</summary><div class="ce-menu-pop">
+      <details class="ce-menu ce-header-menu" name="ce-menu"><summary aria-label="Editing actions">${I.menu}</summary><div class="ce-menu-pop">
       ${hasSaveHandler ? `<div class="ce-save-bar"><button type="button" id="ce-save-exit" class="ce-chip">Save &amp; Exit</button><span id="ce-save-hint" class="ce-sr">Returns the edit to its original composer without sharing.</span></div>` : ""}
       <div class="ce-theme" role="group" aria-label="Tools theme"><span class="ce-theme-label">Tools</span><button type="button" class="ce-theme-btn" data-ce-tools-theme="light" aria-pressed="false">White</button><button type="button" class="ce-theme-btn" data-ce-tools-theme="dark" aria-pressed="true">Black</button></div>
       <button type="button" id="ce-undo" class="ce-chip" aria-label="Undo">${I.undo}<span class="ce-lbl">Undo</span></button>
