@@ -20,7 +20,7 @@ export const I = {
   trim: svg('<rect x="7" y="4" width="10" height="16" rx="2.5"/><path d="M3 8v8M21 8v8"/>'),
   speed: svg('<path d="M4 18a9 9 0 1116 0"/><path d="M12 18l4-6"/>'),
   color: svg('<circle cx="9" cy="9" r="5.5"/><circle cx="15" cy="9" r="5.5"/><circle cx="12" cy="15" r="5.5"/>'),
-  more: svg(iconPaths.more),
+  more: svg(iconPaths.menu),
   split: svg('<path d="M12 3v18M7 7l-3 5 3 5M17 7l3 5-3 5"/>'),
   check: svg('<path d="M5 12l5 5 9-10"/>'),
   sliders: svg(iconPaths.sliders),
