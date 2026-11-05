@@ -27,7 +27,7 @@ test("Profile post metrics sit below media rather than over the preview", () => 
     "the Cloudflare profile count is preserved when a post is normalized");
   assert.match(app, /const profilePostViewCount = p\.cloud && Number\.isSafeInteger\(p\.measuredViews\) && p\.measuredViews >= 0\s*\? p\.measuredViews : 0;/,
     "only a nonnegative server-measured count is shown for cloud posts");
-  assert.ok(app.includes('class="profile-post-views" aria-label="${fmt(profilePostViewCount)} views">${ic.eye}${fmt(profilePostViewCount)}'));
+  assert.ok(app.includes('class="profile-post-views" aria-label="${fmt(profilePostViewCount)} views">${ic.viewBars}<span>${fmt(profilePostViewCount)}</span>'));
   assert.doesNotMatch(app.slice(app.indexOf("const profileGridMarkup"), app.indexOf("const profileGridEmptyMessage")),
     /p\.views/,
     "legacy device counters are not presented as post views");
