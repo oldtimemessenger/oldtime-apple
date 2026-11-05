@@ -68,7 +68,7 @@ export function renderCreateStudio({ destination = "post", hasSource = false, ha
           </div></details>
       <div class="cs-top-end">
         <button type="button" id="ce-studio-publish" class="cs-studio-publish cs-ws-only" disabled>Publish</button>
-        <details class="ce-menu ce-header-menu cs-menu cs-edit-only" name="ce-menu"><summary class="cs-round" aria-label="More actions">${I.more}</summary>
+        <details class="ce-menu ce-header-menu cs-menu cs-edit-only" name="ce-menu"><summary class="cs-round" aria-label="Editing actions">${I.menu}</summary>
           <div class="ce-menu-pop cs-pop">
             ${hasSaveHandler ? `<button type="button" id="ce-save-exit" class="ce-chip">Save &amp; Exit</button><span id="ce-save-hint" class="ce-sr">Returns the edit to its original composer without sharing.</span>` : ""}
             <button type="button" id="ce-layers-toggle" class="cs-row-btn" aria-expanded="false" aria-controls="ce-layer-list">${I.layers}<span class="ce-lbl">Layers</span></button>
