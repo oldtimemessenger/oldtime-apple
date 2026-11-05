@@ -8,7 +8,7 @@ import { icon, iconPaths } from "./icons.js";
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const source = name => readFileSync(path.join(dir, name), "utf8");
 
-test("the shared overflow icon is three vertically stacked dots", () => {
+test("the legacy overflow glyph is retained as an unused compatibility asset", () => {
   const circles = [...iconPaths.more.matchAll(/<circle cx="([\d.]+)" cy="([\d.]+)" r="([\d.]+)"\/>/g)]
     .map(([, x, y]) => [Number(x), Number(y)]);
   assert.deepEqual(circles, [[12, 5], [12, 12], [12, 19]]);
