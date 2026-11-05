@@ -1150,7 +1150,7 @@ function onMessageMore(ctx, cid, id) {
     return;
   }
   const mine = m.author === api.me().id;
-  const actions = ["Reply", "Forward", "Copy", "Keep", ...(m.viewOnce || m.expired ? [] : [messageIsSaved(m, api.me().id) ? "Unsave" : "Save"]), "Pin", "Delete"];
+  const actions = ["Forward", "Copy", "Keep", ...(m.viewOnce || m.expired ? [] : [messageIsSaved(m, api.me().id) ? "Unsave" : "Save"]), "Pin", "Delete"];
   if (mine && m.kind === "text") actions.splice(5, 0, "Edit");
   if (mine && m.cloudSynced) actions.push("Unsend");
   if (!mine && m.cloudSynced && api.authMode() === "cloud") actions.push("Report message");
