@@ -2851,6 +2851,9 @@ function postCard(p, surface = "main") {
             ? `<video class="fullimg carousel-video" ${mediaAttrs(selectedMedia)} ${selectedPosterAttr} data-id="${p.id}" data-dbl="${p.id}" loop playsinline controls preload="metadata" ${muted ? "muted" : ""} aria-label="Video ${selectedSlide + 1} of ${postMedia.length}"></video>`
             : `<img class="fullimg" ${mediaAttrs(selectedMedia)} loading="lazy" decoding="async" alt="Photo ${selectedSlide + 1} of ${postMedia.length}" data-dbl="${p.id}" />`}<span class="carousel-count">${selectedSlide + 1}/${postMedia.length}</span></div>`
         : `<img class="fullimg" ${mediaAttrs(selectedMedia)} loading="lazy" decoding="async" alt="" data-dbl="${p.id}" />`;
+  const viewsMetric = p.cloud && Number.isSafeInteger(p.measuredViews) && p.measuredViews >= 0
+    ? `<span class="ot-view-metric" aria-label="${fmt(p.measuredViews)} views" title="${fmt(p.measuredViews)} views">${ic.viewBars}<span>${fmt(p.measuredViews)}</span></span>`
+    : "";
   const actions = placesViewer
     ? `<button class="act ${liked ? "on" : ""}" data-like="${p.id}" aria-label="${liked ? "Unlike post" : "Like post"}" aria-pressed="${liked}">${liked ? ic.mediaHeartOn : ic.mediaHeart}<span class="act-count">${fmt(likeCount)}</span></button>
        <button class="act" data-comment="${p.id}" aria-label="Comments">${ic.mediaComment}<span class="act-count">${fmt(p.cloud ? (p.commentCount || 0) : (p.comments?.length || 0))}</span></button>
@@ -2859,17 +2862,14 @@ function postCard(p, surface = "main") {
     ? `<button class="act ${liked ? "on" : ""}" data-like="${p.id}" aria-label="${liked ? "Unlike post" : "Like post"}" aria-pressed="${liked}">${liked ? ic.mediaHeartOn : ic.mediaHeart}<span class="act-count">${fmt(likeCount)}</span></button>
        <button class="act" data-comment="${p.id}" aria-label="Comments">${ic.mediaComment}<span class="act-count">${fmt(p.commentCount || 0)}</span></button>
        ${viewsMetric}
-       <button class="act ${saved ? "on" : ""} data-save="${p.id}" aria-label="${saved ? "Remove saved post" : "Save post"}" aria-pressed="${saved}">${saved ? ic.mediaBookmarkOn : ic.mediaBookmark}<span class="act-count">${fmt(saveCount)}</span></button>
+       <button class="act ${saved ? "on" : ""}" data-save="${p.id}" aria-label="${saved ? "Remove saved post" : "Save post"}" aria-pressed="${saved}">${saved ? ic.mediaBookmarkOn : ic.mediaBookmark}<span class="act-count">${fmt(saveCount)}</span></button>
        <button class="act" data-share="${p.id}" aria-label="Share post">${ic.share}<span class="act-label">Share</span></button>`
     : `<button class="act ${liked ? "on" : ""}" data-like="${p.id}" aria-label="${liked ? "Unlike post" : "Like post"}" aria-pressed="${liked}">${liked ? ic.mediaHeartOn : ic.mediaHeart}<span class="act-count">${fmt(likeCount)}</span></button>
        <button class="act" data-comment="${p.id}" aria-label="Comments">${ic.mediaComment}<span class="act-count">${fmt(p.comments.length)}</span></button>
        ${viewsMetric}
        <button class="act ${saved ? "on" : ""} data-save="${p.id}" aria-label="${saved ? "Remove saved post" : "Save post"}" aria-pressed="${saved}">${saved ? ic.mediaBookmarkOn : ic.mediaBookmark}<span class="act-count">${fmt(saveCount)}</span></button>
        <button class="act" data-share="${p.id}" aria-label="Share post">${ic.share}<span class="act-label">Share</span></button>`;
-    const viewsMetric = p.cloud && Number.isSafeInteger(p.measuredViews) && p.measuredViews >= 0
-    ? `<span class="ot-view-metric" aria-label="${fmt(p.measuredViews)} views" title="${fmt(p.measuredViews)} views">${ic.viewBars}<span>${fmt(p.measuredViews)}</span></span>`
-    : "";
-  const soundTitle = audioTitle(p);
+    const soundTitle = audioTitle(p);
     const soundLine = /^original audio(?:\s*[·-]\s*)?@?/i.test(soundTitle)
       ? soundTitle.replace(/^original audio(?:\s*[·-]\s*)?@?/i, "original sound - ")
       : soundTitle;
