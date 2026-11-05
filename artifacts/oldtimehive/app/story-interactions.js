@@ -194,7 +194,7 @@ export function mountStoryInteractions({ view, story, api, toast = () => {}, pau
           <div class="story-panel-handle" aria-hidden="true"></div>
           <header class="story-panel-head">
             <div class="story-panel-tabs" role="tablist" aria-label="Story controls">
-              ${isOwner ? `<button type="button" class="story-activity-open story-panel-tab" role="tab" aria-selected="false">${icon("eye")}<span>Views</span></button>` : ""}
+              ${isOwner ? `<button type="button" class="story-activity-open story-panel-tab" role="tab" aria-selected="false">${icon("viewBars")}<span>Views</span></button>` : ""}
               <button type="button" class="story-options-open story-panel-tab" role="tab" aria-selected="true">Options</button>
             </div>
             <button type="button" class="story-panel-close" aria-label="Close Story controls">${icon("close")}</button>
