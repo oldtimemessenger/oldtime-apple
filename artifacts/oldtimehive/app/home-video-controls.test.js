@@ -5,6 +5,7 @@ import { readFileSync } from "node:fs";
 const app = readFileSync(new URL("./app.js", import.meta.url), "utf8");
 const store = readFileSync(new URL("./store.js", import.meta.url), "utf8");
 const css = readFileSync(new URL("./styles.css", import.meta.url), "utf8");
+const icons = readFileSync(new URL("./icons.js", import.meta.url), "utf8");
 const profileRefinements = readFileSync(new URL("./destination-landing-refinement.css", import.meta.url), "utf8");
 const audioPanel = readFileSync(new URL("./audio-panel.js", import.meta.url), "utf8");
 const soundbarStart = app.indexOf('<div class="soundbar"');
@@ -85,4 +86,15 @@ test("Opaque cross-origin browser errors are not shown verbatim as app toasts", 
   assert.match(app, /function handleUnhandledClientError\(error\)/);
   assert.match(app, /crossOriginLoad = \/cross\[- \]origin/);
   assert.doesNotMatch(app, /toast\(e\.(?:error|reason)\.message\)/);
+});
+
+
+test("Qualifying post views use Old Time's own vertical-bar mark in feed and Community action rows", () => {
+  assert.match(icons, /viewBars:\s*'<path d="M4 19V13M9\.3 19V8M14\.7 19V4M20 19V10"/);
+  assert.match(app, /const viewsMetric = p\.cloud && Number\.isSafeInteger\(p\.measuredViews\) && p\.measuredViews >= 0/);
+  assert.match(app, /class="ot-view-metric" aria-label="\$\{fmt\(p\.measuredViews\)\} views"/);
+  assert.match(app, /class="ot-view-metric" aria-label="\$\{fmt\(post\.measuredViews\)\} views"/);
+  assert.match(app, /\$\{likeButton\}\$\{repostButton\}\$\{commentButton\}\$\{viewsMetric\}\$\{saveButton\}\$\{shareButton\}/);
+  assert.match(css, /\.community-post-actions \{[^}]*grid-template-columns:repeat\(6,minmax\(0,1fr\)\)/);
+  assert.match(css, /\.ot-view-metric \.navic \{ width:18px; height:18px/);
 });
