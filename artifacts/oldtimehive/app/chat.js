@@ -1076,7 +1076,7 @@ function openMessageQuickActions(ctx, cid, id) {
   toolbar.setAttribute("aria-label", "Reply or react to message");
   toolbar.innerHTML = `${REACTS.slice(0, 4).map(emoji =>
     `<button type="button" data-chat-quick-reaction="${ctxEsc(emoji)}" aria-label="React with ${ctxEsc(emoji)}">${ctxEsc(emoji)}</button>`
-  ).join("")}<button type="button" class="chat-quick-reply" data-chat-quick-reply>Reply</button><button type="button" class="chat-quick-more" data-chat-quick-more aria-label="More message actions">${ic.more}</button>`;
+  ).join("")}<button type="button" class="chat-quick-reply" data-chat-quick-reply>Reply</button><button type="button" class="chat-quick-more" data-chat-quick-more aria-label="Message actions">${ic.menu}</button>`;
   const rect = bubble.getBoundingClientRect();
   const estimatedWidth = 236;
   toolbar.style.top = `${Math.max(8, rect.top - 48)}px`;
@@ -1150,7 +1150,7 @@ function onMessageMore(ctx, cid, id) {
     return;
   }
   const mine = m.author === api.me().id;
-  const actions = ["Reply", "React", "Forward", "Copy", "Keep", ...(m.viewOnce || m.expired ? [] : [messageIsSaved(m, api.me().id) ? "Unsave" : "Save"]), "Pin", "Delete"];
+  const actions = ["Reply", "Forward", "Copy", "Keep", ...(m.viewOnce || m.expired ? [] : [messageIsSaved(m, api.me().id) ? "Unsave" : "Save"]), "Pin", "Delete"];
   if (mine && m.kind === "text") actions.splice(5, 0, "Edit");
   if (mine && m.cloudSynced) actions.push("Unsend");
   if (!mine && m.cloudSynced && api.authMode() === "cloud") actions.push("Report message");
@@ -1168,10 +1168,6 @@ function onMessageMore(ctx, cid, id) {
       return;
     }
     if (label === "Reply") ui.reply = id;
-    if (label === "React") {
-      const target = document.createElement("input");
-      return openEmojiPicker(target, emoji => { react(cid, id, emoji); ctx.render(); }, { chat: true, selectOnly: true });
-    }
     if (label === "Forward") return forward(ctx, cid, id);
     if (label === "Copy") { navigator.clipboard?.writeText(m.body || preview(m)).then(() => ctx.toast("Copied")).catch(() => ctx.toast("Couldn't copy")); if (!navigator.clipboard) ctx.toast("Clipboard unavailable"); }
       if (label === "Keep") mutate(db => { const msg = db.convos.find(x => x.id === cid).messages.find(x => x.id === id); msg.kept = true; delete msg.expiresAt; db.kept = db.kept || []; db.kept.push({ id, chat: cid, body: (msg.body || "").slice(0, 280), kind: msg.kind, at: Date.now() }); });
