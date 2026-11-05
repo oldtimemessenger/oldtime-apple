@@ -5303,7 +5303,7 @@ function profile(id) {
         <p class="profile-post-caption">${esc(postCaption)}</p>
         <div class="profile-post-stats">
           <span class="profile-post-likes" aria-label="${fmt(postLikes)} likes">${ic.mediaHeart}${fmt(postLikes)}</span>
-          <span class="profile-post-views" aria-label="${fmt(profilePostViewCount)} views">${ic.eye}${fmt(profilePostViewCount)}</span>
+          <span class="profile-post-views" aria-label="${fmt(profilePostViewCount)} views">${ic.viewBars}<span>${fmt(profilePostViewCount)}</span></span>
         </div>
       </div>
     </article>`;
