@@ -1899,9 +1899,16 @@ async function navigateFromDrawer(route) {
   }
   if (route === "communities") return navigateMainSection("communities");
   if (route === "sports") {
-    const [{ openSportsMode }, { sports }, { sportsSocial }] = await Promise.all([
-      import("./sports-mode.js"), import("./sports-engine.js"), import("./sports-social.js"),
-    ]);
+    let openSportsMode, sports, sportsSocial;
+    try {
+      [{ openSportsMode }, { sports }, { sportsSocial }] = await Promise.all([
+        import("./sports-mode.js"), import("./sports-engine.js"), import("./sports-social.js"),
+      ]);
+    } catch (error) {
+      console.error("[Oldtime sports] Could not load the Sports experience.", error);
+      toast("Sports could not be opened. Please try again.");
+      return;
+    }
     openSportsMode({ toast,
       onShare: async ({ media, caption }) => {
         // Register generated recordings like uploads; unregistered blob URLs
