@@ -8803,7 +8803,7 @@ function settings() {
       : view === "chat" ? `${prefs.readReceipts === false ? "Receipts off" : "Receipts on"} · ${prefs.lastSeen || "everyone"}`
       : "";
     return `<button type="button" class="settings-entry" data-testid="button-settings-${id || view}" ${view ? `data-settings="${view}"` : ""} ${id ? `id="${id}"` : ""}>
-      <span class="settings-entry-icon">${ic[iconName] || ic.more}</span>
+      <span class="settings-entry-icon">${ic[iconName] || ic.info}</span>
       <span class="settings-entry-copy"><b>${label}</b>${summary ? `<small>${summary}</small>` : ""}</span>
       ${value ? `<small class="settings-entry-value">${value}</small>` : ""}
       <span class="settings-entry-chevron" aria-hidden="true">›</span>
