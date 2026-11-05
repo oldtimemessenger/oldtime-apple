@@ -5356,7 +5356,7 @@ function profile(id) {
    shell(`<section class="screen on profile-screen"><div class="scroll profile-page">
     <div class="profile-hero${coverImage ? "" : " profile-no-cover"}">
        <div class="profile-cover"><img class="profile-cover-background" ${profileMediaSource(coverImage)} alt="" aria-hidden="true" /><img class="profile-cover-landscape" ${profileMediaSource(coverImage)} alt="" /></div>
-        <div class="profile-topbar"><button id="back" aria-label="Back">←</button><div class="row profile-topbar-actions"><button id="sharep" class="profile-share" aria-label="Share profile" title="Share profile">${ic.share}</button><button type="button" class="icon profile-more" id="profile-actions-open" aria-label="${mine ? "Open profile settings and actions" : "More profile actions"}" title="${mine ? "Settings" : "Profile actions"}">${mine ? ic.gear : ic.tune}</button></div></div>
+        <div class="profile-topbar"><button id="back" aria-label="Back">←</button><div class="row profile-topbar-actions"><button id="sharep" class="profile-share" aria-label="Share profile" title="Share profile">${ic.share}</button><button type="button" class="icon profile-more" id="profile-actions-open" aria-label="${mine ? "Open profile settings and actions" : "More profile actions"}" title="${mine ? "Settings" : "Profile actions"}">${ic.menu}</button></div></div>
       <div class="profile-intro">
          <div class="profile-overview-row">
           <div class="profile-avatar-wrap">
@@ -8695,7 +8695,17 @@ function settings() {
       });
     }).catch(error=>{
       console.warn("Review queue could not open",error);
-      if(live&&host.isConnected){host.textContent="We couldn’t open this page. Please go back and try again.";}
+      if(live&&host.isConnected){
+  host.innerHTML=`<div role="alert" class="route-load-error"><p>We couldn’t open the review queue.</p><button type="button" id="review-queue-retry">Try again</button><button type="button" id="review-queue-back">Back to Settings</button></div>`;
+  host.querySelector("#review-queue-retry")?.addEventListener("click",()=>{
+    if(!live)return;
+    libraryPage?.close();libraryPage=null;render();
+  });
+  host.querySelector("#review-queue-back")?.addEventListener("click",()=>{
+    if(!live)return;
+    libraryPage?.close();libraryPage=null;settingsView="home";render();
+  });
+}
     });
     return;
   }
