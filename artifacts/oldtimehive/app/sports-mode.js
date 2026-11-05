@@ -162,7 +162,7 @@ function header() {
   return `<header class="sp-head"><button type="button" class="sp-ibtn" data-act="${root ? "minimize" : "back"}" aria-label="${root ? "Back to Oldtime" : "Back"}">${svg(root ? I.close : I.back)}</button>
   <h2>${titles[ui.screen]}</h2>${closeReplay
     ? `<button type="button" class="sp-ibtn sp-close-flyover" data-act="close-replay" aria-label="Close flyover">${svg(I.close)}</button>`
-    : `<div class="sp-menuwrap"><button type="button" class="sp-ibtn" data-act="menu" aria-haspopup="menu" aria-expanded="false" aria-label="More">${svg(I.more)}</button></div>`}</header>
+    : `<div class="sp-menuwrap"><button type="button" class="sp-ibtn" data-act="menu" aria-haspopup="menu" aria-expanded="false" aria-label="Menu">${svg(I.menu)}</button></div>`}</header>
   ${ROOT.includes(ui.screen) && ui.screen !== "record" ? `<nav class="sp-tabs" role="tablist" aria-label="Sports sections">${TABS.map(([k, t]) => `<button type="button" role="tab" aria-selected="${cur === k}" data-nav="${k}">${t}</button>`).join("")}</nav>` : ""}`;
 }
 function render(keepScroll) {
