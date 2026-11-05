@@ -1019,7 +1019,7 @@ function body(m, readOnly = false) {
   if (m.kind === "location") {
     const location = parseSharedCoordinates(m.body);
     if (!location) return "Location · " + ctxEsc(m.body || "Shared place");
-    return `<div class="chat-location-message"><a class="chat-location-card" href="${ctxEsc(location.mapsUrl)}" target="_blank" rel="noopener noreferrer"><span class="chat-location-icon">${ic.location}</span><span class="chat-location-copy"><b>Shared location</b><small>Open in Maps</small></span><span class="chat-location-external" aria-hidden="true">↗</span></a>${readOnly ? "" : `<button type="button" class="chat-location-options" data-location-options="${ctxEsc(m.id)}" aria-label="Location message options">${ic.more}</button>`}</div>`;
+    return `<div class="chat-location-message"><a class="chat-location-card" href="${ctxEsc(location.mapsUrl)}" target="_blank" rel="noopener noreferrer"><span class="chat-location-icon">${ic.location}</span><span class="chat-location-copy"><b>Shared location</b><small>Open in Maps</small></span><span class="chat-location-external" aria-hidden="true">↗</span></a>${readOnly ? "" : `<button type="button" class="chat-location-options" data-location-options="${ctxEsc(m.id)}" aria-label="Location message options">${ic.menu}</button>`}</div>`;
   }
   if (m.kind === "contact") return "Contact · " + ctxEsc(m.body || "");
   if (m.kind === "call") return ctxEsc(text || "Call");
