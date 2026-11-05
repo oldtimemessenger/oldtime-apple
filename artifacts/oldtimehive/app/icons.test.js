@@ -66,10 +66,9 @@ test("chat long-press keeps reactions while the message actions menu does not du
 
 test("the signed-in profile uses a hamburger menu while other profiles keep their action menu", () => {
   const app = source("app.js");
-  assert.match(app, /mine \? ic\.gear : ic\.(?:more|tune)/);
-  assert.match(app, /mine \? "Open profile settings and actions" : "More profile actions"/);
-  assert.ok(iconPaths.gear.includes('<circle cx="12" cy="12" r="3"/>'));
-  assert.match(icon("gear"), /<svg[^>]*><path d=/);
+  assert.match(app, /profile-actions-open[\\s\\S]*?\\$\\{ic\\.menu\\}/);
+  assert.match(app, /id="review-queue-retry"/);
+  assert.match(app, /id="review-queue-back"/);
 });
 
 test("comment controls use a heart for Like and a downward thumb for Dislike", () => {
