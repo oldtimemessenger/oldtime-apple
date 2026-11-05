@@ -57,7 +57,9 @@ test("chat long-press keeps reactions while the message actions menu does not du
   const chat = source("chat.js");
   assert.match(chat, /data-chat-quick-reaction/);
   assert.match(chat, /aria-label="Message actions">\$\{ic\.menu\}/);
-  assert.match(chat, /const actions = \["Reply", "Forward", "Copy", "Keep"/);
+  assert.match(chat, /const actions = \["Forward", "Copy", "Keep"/);
+  assert.match(chat, /data-chat-quick-reply/);
+  assert.doesNotMatch(chat, /if \(label === "Reply"\)/);
   assert.doesNotMatch(chat, /const actions = \["Reply", "React"/);
   assert.match(chat, /openMessageQuickActions\(ctx, id, b\.dataset\.msg\)/);
 });
