@@ -13,7 +13,7 @@ import { iconPaths } from "./icons.js";
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const label = t => ACTIVITIES.find(a => a.id === t)?.label || "Workout";
 const I = {
-  back: '<path d="M15 5l-7 7 7 7"/>', more: iconPaths.more,
+  back: '<path d="M15 5l-7 7 7 7"/>', more: iconPaths.menu,
   run: '<circle cx="14" cy="4.5" r="1.8"/><path d="M8 21l3-6 3 2 1 4M11 15l-1-5 4-2 2 4 3 1M10 10L7 12"/>',
   walk: '<circle cx="12" cy="4.5" r="1.8"/><path d="M12 8v6l-3 7M12 14l3 3 1 4M9 10l3-2 3 2"/>',
   cycle: '<circle cx="6" cy="16" r="3.6"/><circle cx="18" cy="16" r="3.6"/><path d="M6 16l4-8h5l3 8M10 8l4 8"/>',
