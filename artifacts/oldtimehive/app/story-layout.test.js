@@ -52,6 +52,7 @@ test("story media fills the viewer and reply permissions stay in the options men
   assert.doesNotMatch(interactions, /slice\(-80\)/, "expanded history keeps every loaded Story reply");
   assert.match(interactionCss, /prefers-reduced-motion: reduce/);
   assert.match(interactions, /class="story-activity-open story-panel-tab"/);
+  assert.ok(interactions.includes('icon("viewBars")'));
   assert.doesNotMatch(interactions, /story-side-actions|story-heart/);
   assert.doesNotMatch(interactions, /class="story-quick-reaction"/);
   assert.match(interactions, /class="story-reaction-open"/);
@@ -69,7 +70,7 @@ test("story media fills the viewer and reply permissions stay in the options men
   assert.match(interactionCss, /\.story-live-message\[hidden\]\s*\{[^}]*display:none!important/);
   assert.match(interactionCss, /\.story-reaction-picker\s*\{[^}]*background:transparent/);
   assert.match(icons, /more: '<circle cx="12" cy="5"[\s\S]*?cy="12"[\s\S]*?cy="19"/);
-  assert.match(icons, /eye: '<path/);
+  assert.match(icons, /viewBars: '<path/);
   assert.match(icons, /smilePlus: '<circle/);
   assert.match(js, /id="sclose"/);
   assert.doesNotMatch(js, /id="ssave"|id="sdelete"/);
