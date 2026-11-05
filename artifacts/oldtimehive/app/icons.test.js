@@ -45,6 +45,10 @@ test("app action menus use the hamburger icon instead of vertical overflow dots"
   assert.match(source("creative-create-view.js"), /aria-label="Editing actions">\$\{I\.menu\}/);
   assert.match(source("creative-editor-view.js"), /aria-label="Editing actions">\$\{I\.menu\}/);
   assert.match(source("blast-social.js"), /aria-label="Post type options"[^>]*>\$\{icon\("menu"\)\}/);
+  assert.match(source("creative-view-icons.js"), /more:\s*svg\(iconPaths\.menu\)/);
+  assert.match(source("sports-mode.js"), /more:\s*iconPaths\.menu/);
+  assert.match(source("post-actions-menu.js"), /icons\.tune \|\| icons\.menu/);
+  assert.match(source("app.js"), /ic\[iconName\] \|\| ic\.info/);
   assert.match(source("story-interactions.js"), /icon\("tune"\)/);
   assert.match(source("app.js"), /aria-label="Comment actions">\$\{ic\.tune\}/);
 });
