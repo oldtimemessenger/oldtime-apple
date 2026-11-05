@@ -56,7 +56,9 @@ async function startOldtime() {
 
 startOldtime().catch(error => {
   const label = document.getElementById("oldtime-startup-label");
+  const status = document.getElementById("oldtime-startup-status");
   const retry = document.getElementById("oldtime-startup-retry");
   if (label) label.textContent = error.message || "Oldtime could not clear old device data.";
+  if (status) status.hidden = false;
   if (retry) retry.hidden = false;
 });
