@@ -467,7 +467,7 @@ function compose(ctx, isEvent = false) {
           <div class="blast-notes-top-actions">
             <button type="button" class="blast-notes-icon" data-blast-editor-undo aria-label="Undo last text edit" title="Undo">${`↶`}</button>
             <button type="submit" class="blast-notes-share" aria-label="Share post" data-testid="blast-submit">${icon("share")}<span>Share</span></button>
-            <button type="button" class="blast-notes-icon" data-blast-panel-toggle="type" aria-label="Post type options" aria-expanded="${composerPanelOpen === "type"}">${icon("more")}</button>
+            <button type="button" class="blast-notes-icon" data-blast-panel-toggle="type" aria-label="Post type options" aria-expanded="${composerPanelOpen === "type"}">${icon("menu")}</button>
           </div>
         </header>
         <div class="blast-notes-writing">
