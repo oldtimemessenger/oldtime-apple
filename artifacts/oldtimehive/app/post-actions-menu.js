@@ -16,7 +16,7 @@ export function renderPostActionsMenu({
          <button type="button" class="is-destructive" role="menuitem" data-delete-post="${id}">${icons.trash || ""}<span>Delete post</span></button>
        </div>` : "";
   return `<details class="post-actions-menu${className ? ` ${e(className)}` : ""}" data-post-actions-menu>
-    <summary aria-label="Post actions" title="Post actions">${icons.tune || icons.more || ""}</summary>
+    <summary aria-label="Post actions" title="Post actions">${icons.tune || icons.menu || ""}</summary>
     <div class="post-actions-menu-items" role="menu" aria-label="Post actions">
       <div class="post-actions-menu-group" role="group" aria-label="Manage post">
         <button type="button" role="menuitem" data-post-edit="${id}" data-testid="button-edit-post-${id}">${icons.edit || ""}<span>Edit post</span></button>
