@@ -40,11 +40,22 @@ test("Messages is an original outline stack with an open pair of back edges",()=
   assert.doesNotMatch(icon('bad"><script>'),/<script>/);
 });
 
-test("studio, sports, story and comment menus use the vertical overflow glyph or tune icon", () => {
-  assert.match(source("creative-view-icons.js"), /more:\s*svg\(iconPaths\.more\)/);
-  assert.match(source("sports-mode.js"), /more:\s*iconPaths\.more/);
+test("app action menus use the hamburger icon instead of vertical overflow dots", () => {
+  assert.match(source("sports-mode.js"), /aria-label="Menu">\$\{svg\(I\.menu\)\}/);
+  assert.match(source("creative-create-view.js"), /aria-label="Editing actions">\$\{I\.menu\}/);
+  assert.match(source("creative-editor-view.js"), /aria-label="Editing actions">\$\{I\.menu\}/);
+  assert.match(source("blast-social.js"), /aria-label="Post type options"[^>]*>\$\{icon\("menu"\)\}/);
   assert.match(source("story-interactions.js"), /icon\("tune"\)/);
   assert.match(source("app.js"), /aria-label="Comment actions">\$\{ic\.tune\}/);
+});
+
+test("chat long-press keeps reactions while the message actions menu does not duplicate them", () => {
+  const chat = source("chat.js");
+  assert.match(chat, /data-chat-quick-reaction/);
+  assert.match(chat, /aria-label="Message actions">\$\{ic\.menu\}/);
+  assert.match(chat, /const actions = \["Reply", "Forward", "Copy", "Keep"/);
+  assert.doesNotMatch(chat, /const actions = \["Reply", "React"/);
+  assert.match(chat, /openMessageQuickActions\(ctx, id, b\.dataset\.msg\)/);
 });
 
 test("the signed-in profile uses a hamburger menu while other profiles keep their action menu", () => {
